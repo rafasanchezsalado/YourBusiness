@@ -16,3 +16,11 @@ services:
     build: ./backend/
     ports:
       - "8080:8080"
+
+  frontend:
+    build: ./frontend/
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend/:/your-business-frontend
+    ports:
+      - 80:5173
