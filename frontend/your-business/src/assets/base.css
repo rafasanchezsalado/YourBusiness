@@ -1,27 +1,38 @@
 /* Utility */
 :root {
-  --yb-color-utility-white-1: rgba(255, 255, 255, 1.00);
-  --yb-color-utility-white-2: rgba(255, 255, 255, 0.75);
-  --yb-color-utility-white-3: rgba(255, 255, 255, 0.50);
-  --yb-color-utility-white-4: rgba(255, 255, 255, 0.25);
-  --yb-color-utility-black-1: rgba(0, 0, 0, 1.00);
-  --yb-color-utility-black-2: rgba(0, 0, 0, 0.75);
-  --yb-color-utility-black-3: rgba(0, 0, 0, 0.50);
-  --yb-color-utility-black-4: rgba(0, 0, 0, 0.25);
+  --yb-color-utility-white-1: #ffffffff;
+  --yb-color-utility-white-2: #ffffffbf;
+  --yb-color-utility-white-3: #ffffff80;
+  --yb-color-utility-white-4: #ffffff40;
 
-  --yb-color-utility-error: #ff0000;
-  --yb-color-utility-warn: #ffa500;
-  --yb-color-utility-success: #008000;
+  --yb-color-utility-black-1: #000000ff;
+  --yb-color-utility-black-2: #000000bf;
+  --yb-color-utility-black-3: #00000080;
+  --yb-color-utility-black-4: #00000040;
+
+  --yb-color-utility-success-default: #80ff80;
+  --yb-color-utility-warn-default: #ffa580;
+  --yb-color-utility-error-default: #ff8080;
+  
+  --yb-color-utility-success: green, var(--yb-color-utility-success-default);
+  --yb-color-utility-warn: orange, var(--yb-color-utility-warn-default);
+  --yb-color-utility-error: red, var(--yb-color-utility-error-default);
 }
+
 /* Palette */
 :root {
-  --yb-color-primary: #0000ff;
-  --yb-color-secondary: purple;
+  --yb-color-primary: color-mix(in srgb, #00f, #fff);
+  --yb-color-secondary: color-mix(in srgb, var(--yb-color-primary) 87.5%, #fff);
+  --yb-color-tertiary: color-mix(in srgb, var(--yb-color-primary) 75%, #fff);
 }
+
 /* Elements LIGHT */
-:root {
-  --color-background: var(---yb-color-utility-white-1);
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: var(---yb-color-utility-white-1);
+  }
 }
+
 /* Elements DARK */
 @media (prefers-color-scheme: dark) {
   :root {
