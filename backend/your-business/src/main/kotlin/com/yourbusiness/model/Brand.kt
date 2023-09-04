@@ -5,6 +5,9 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.util.UUID
 
-@Table(name = "Brands")
-data class Brand(@Id @Column val id: String = UUID.randomUUID().toString(),
-                 @Column val name: String) {}
+@Table(name = "brands")
+data class Brand(
+    @Id @Column val id: String = UUID.randomUUID().toString().replace("-", ""),
+    @Column var name: String = ""
+)
+
