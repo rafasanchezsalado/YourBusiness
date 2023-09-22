@@ -24,10 +24,12 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	// Spring
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	// implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-jdbc:3.1.3")
 	// Database
 	implementation("org.postgresql:postgresql")
+	implementation("org.hibernate:hibernate-core:6.3.0.Final")
+	implementation("org.hibernate.orm:hibernate-core:6.3.0.Final")
 	// Tests
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	// Runtime
