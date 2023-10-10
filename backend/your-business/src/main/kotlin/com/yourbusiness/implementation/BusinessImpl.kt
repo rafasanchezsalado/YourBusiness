@@ -5,28 +5,38 @@ import com.yourbusiness.service.BusinessService
 import org.springframework.stereotype.Repository
 
 @Repository
-class BusinessImpl(businessService: BusinessService) {
+class BusinessImpl(private val businessService: BusinessService = BusinessService()) {
 
-    private var business: Business = Business(name = "Business")
-
-    fun getElement(id: String): Business {
-        return business
+    fun get(id: String): Business? {
+        return businessService.getBusiness(id)
     }
 
-    fun getAll(): List<Business> {
-        return listOf(business)
+    fun get(): List<Business> {
+        return businessService.getBusiness()
     }
 
-    fun update(id: String, businessRequest: Business) {
-        business = businessRequest
+    fun update(businessRequest: Business) {
+        businessService.updateBusiness(businessRequest)
+    }
+
+    fun update(businessList: List<Business>) {
+        businessService.updateBusiness(businessList)
     }
 
     fun save(businessRequest: Business) {
-        TODO("Not yet implemented")
+        businessService.insertBusiness(businessRequest)
+    }
+
+    fun save(businessList: List<Business>) {
+        businessService.insertBusiness(businessList)
     }
 
     fun delete(id: String) {
-        business = Business()
+        businessService.deleteBusiness(id)
+    }
+
+    fun delete(businessList: List<Business>) {
+        businessService.deleteBusiness(businessList)
     }
 
 }

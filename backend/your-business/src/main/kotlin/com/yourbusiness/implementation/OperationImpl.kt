@@ -5,32 +5,38 @@ import com.yourbusiness.service.OperationService
 import org.springframework.stereotype.Repository
 
 @Repository
-class OperationImpl(operationService: OperationService) {
+class OperationImpl(private val operationService: OperationService = OperationService()) {
 
-    private val operation1: Operation = Operation()
-    private val operation2: Operation = Operation()
-    private val operation3: Operation = Operation()
-    private val operations: ArrayList<Operation> = arrayListOf(operation1, operation2, operation3)
-
-    fun getElement(id: String): Operation? {
-        return operations.find { operation: Operation -> operation.id == id }
+    fun get(id: String): Operation? {
+        return operationService.getOperation(id)
     }
 
-    fun getAll(): List<Operation> {
-        return operations
+    fun get(): List<Operation> {
+        return operationService.getOperations()
     }
 
-    fun update(id: String, operationRequest: Operation) {
-        val operation: Operation? = operations.find { operation: Operation -> operation.id == id }
-        operations[operations.indexOf(operation)] = operationRequest
+    fun update(operationRequest: Operation) {
+        operationService.updateOperation(operationRequest)
+    }
+
+    fun update(operationsList: List<Operation>) {
+        operationService.updateOperations(operationsList)
     }
 
     fun save(operationRequest: Operation) {
-        operations.add(operationRequest)
+        operationService.insertOperation(operationRequest)
+    }
+
+    fun save(operationsList: List<Operation>) {
+        operationService.insertOperations(operationsList)
     }
 
     fun delete(id: String) {
-        operations.remove(operations.find { operation: Operation -> operation.id == id })
+        operationService.deleteOperation(id)
+    }
+
+    fun delete(operationsList: List<Operation>) {
+        operationService.deleteOperations(operationsList)
     }
 
 }

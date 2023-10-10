@@ -6,34 +6,46 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class ProductController {
-
-    @Autowired
-    val productDao: ProductDao = ProductDao()
+class ProductController(@Autowired val productDao: ProductDao = ProductDao()) {
 
     @GetMapping("/products/{id}") // GET
     fun getElement(@PathVariable id: String): Product? {
-        return productDao.getElement(id)
+        return productDao.get(id)
     }
 
     @GetMapping("/products") // GET
     fun getAll(): List<Product> {
-        return productDao.getAll()
+        return productDao.get()
     }
 
-    @PutMapping("/products/{id}") // PUT
-    fun update(@PathVariable id: String, @RequestBody product: Product) {
-        return productDao.update(id, product)
+    @PutMapping("/products") // PUT
+    fun updateElement(@RequestBody product: Product) {
+        return productDao.update(product)
+    }
+
+    @PutMapping("/products/list") // PUT
+    fun updateList(@RequestBody products: List<Product>) {
+        return productDao.update(products)
     }
 
     @PostMapping("/products") // POST
-    fun save(@RequestBody product: Product) {
+    fun saveElement(@RequestBody product: Product) {
         return productDao.save(product)
+    }
+
+    @PostMapping("/products/list") // POST
+    fun saveList(@RequestBody products: List<Product>) {
+        return productDao.save(products)
     }
 
     @DeleteMapping("/products/{id}") // DELETE
     fun delete(@PathVariable id: String) {
         return productDao.delete(id)
+    }
+
+    @DeleteMapping("/products") // DELETE
+    fun deleteAll(@RequestBody products: List<Product>) {
+        return productDao.delete(products)
     }
 
 }
