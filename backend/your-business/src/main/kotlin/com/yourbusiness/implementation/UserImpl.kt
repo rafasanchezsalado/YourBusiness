@@ -5,32 +5,38 @@ import com.yourbusiness.service.UserService
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserImpl(userService: UserService) {
+class UserImpl(private val userService: UserService = UserService()) {
 
-    private val user1: User = User()
-    private val user2: User = User()
-    private val user3: User = User()
-    private val users: ArrayList<User> = arrayListOf(user1, user2, user3)
-
-    fun getElement(id: String): User? {
-        return users.find { user: User -> user.id == id }
+    fun get(id: String): User? {
+        return userService.getUser(id)
     }
 
-    fun getAll(): List<User> {
-        return users
+    fun get(): List<User> {
+        return userService.getUsers()
     }
 
-    fun update(id: String, userRequest: User) {
-        val user: User? = users.find { user: User -> user.id == id }
-        users[users.indexOf(user)] = userRequest
+    fun update(userRequest: User) {
+        userService.updateUser(userRequest)
+    }
+
+    fun update(usersList: List<User>) {
+        userService.updateUsers(usersList)
     }
 
     fun save(userRequest: User) {
-        users.add(userRequest)
+        userService.insertUser(userRequest)
+    }
+
+    fun save(usersList: List<User>) {
+        userService.insertUsers(usersList)
     }
 
     fun delete(id: String) {
-        users.remove(users.find { user: User -> user.id == id })
+        userService.deleteUser(id)
+    }
+
+    fun delete(usersList: List<User>) {
+        userService.deleteUsers(usersList)
     }
 
 }

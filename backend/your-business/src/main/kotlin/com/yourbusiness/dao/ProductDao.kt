@@ -2,33 +2,39 @@ package com.yourbusiness.dao
 
 import com.yourbusiness.implementation.ProductImpl
 import com.yourbusiness.model.Product
-import com.yourbusiness.service.ProductService
-import org.springframework.jdbc.core.JdbcTemplate
 
-class ProductDao : Dao<Product> {
+class ProductDao(private val productImpl: ProductImpl = ProductImpl()) : Dao<Product> {
 
-    private val productImpl: ProductImpl = ProductImpl(ProductService(JdbcTemplate()))
-
-    override fun getElement(id: String): Product? {
-        return productImpl.getElement(id)
+    override fun get(id: String): Product? {
+        return productImpl.get(id)
     }
 
-    override fun getAll(): List<Product> {
-        return productImpl.getAll()
+    override fun get(): List<Product> {
+        return productImpl.get()
     }
 
-    override fun update(id: String, obj: Product) {
-        productImpl.update(id, obj)
+    override fun update(obj: Product) {
+        productImpl.update(obj)
+    }
+
+    override fun update(list: List<Product>) {
+        productImpl.update(list)
     }
 
     override fun save(obj: Product) {
         productImpl.save(obj)
     }
 
+    override fun save(list: List<Product>) {
+        productImpl.save(list)
+    }
+
     override fun delete(id: String) {
         productImpl.delete(id)
     }
 
+    override fun delete(list: List<Product>) {
+        productImpl.delete(list)
+    }
+
 }
-
-

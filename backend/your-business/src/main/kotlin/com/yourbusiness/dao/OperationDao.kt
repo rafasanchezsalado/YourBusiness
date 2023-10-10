@@ -2,31 +2,39 @@ package com.yourbusiness.dao
 
 import com.yourbusiness.implementation.OperationImpl
 import com.yourbusiness.model.Operation
-import com.yourbusiness.service.OperationService
-import org.springframework.jdbc.core.JdbcTemplate
 
-class OperationDao : Dao<Operation> {
+class OperationDao(private val operationImpl: OperationImpl = OperationImpl()) : Dao<Operation> {
 
-    private val operationImpl: OperationImpl = OperationImpl(OperationService(JdbcTemplate()))
-
-    override fun getElement(id: String): Operation? {
-        return operationImpl.getElement(id)
+    override fun get(id: String): Operation? {
+        return operationImpl.get(id)
     }
 
-    override fun getAll(): List<Operation> {
-        return operationImpl.getAll()
+    override fun get(): List<Operation> {
+        return operationImpl.get()
     }
 
-    override fun update(id: String, obj: Operation) {
-        operationImpl.update(id, obj)
+    override fun update(obj: Operation) {
+        operationImpl.update(obj)
+    }
+
+    override fun update(list: List<Operation>) {
+        operationImpl.update(list)
     }
 
     override fun save(obj: Operation) {
         operationImpl.save(obj)
     }
 
+    override fun save(list: List<Operation>) {
+        operationImpl.save(list)
+    }
+
     override fun delete(id: String) {
         operationImpl.delete(id)
+    }
+
+    override fun delete(list: List<Operation>) {
+        operationImpl.delete(list)
     }
 
 }

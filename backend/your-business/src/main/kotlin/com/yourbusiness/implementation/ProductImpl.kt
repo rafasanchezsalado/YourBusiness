@@ -5,32 +5,38 @@ import com.yourbusiness.service.ProductService
 import org.springframework.stereotype.Repository
 
 @Repository
-class ProductImpl(productService: ProductService) {
+class ProductImpl(private val productService: ProductService = ProductService()) {
 
-    private val product1: Product = Product(name = "product1", price = 1.0)
-    private val product2: Product = Product(name = "product2", price = 2.0)
-    private val product3: Product = Product(name = "product3", price = 3.0)
-    private val products: ArrayList<Product> = arrayListOf(product1, product2, product3)
-
-    fun getElement(id: String): Product? {
-        return products.find { product: Product -> product.id == id }
+    fun get(id: String): Product? {
+        return productService.getProduct(id)
     }
 
-    fun getAll(): List<Product> {
-        return products
+    fun get(): List<Product> {
+        return productService.getProducts()
     }
 
-    fun update(id: String, productRequest: Product) {
-        val product: Product? = products.find { product: Product -> product.id == id }
-        products[products.indexOf(product)] = productRequest
+    fun update(productRequest: Product) {
+        productService.updateProduct(productRequest)
+    }
+
+    fun update(productsList: List<Product>) {
+        productService.updateProducts(productsList)
     }
 
     fun save(productRequest: Product) {
-        products.add(productRequest)
+        productService.insertProduct(productRequest)
+    }
+
+    fun save(productsList: List<Product>) {
+        productService.insertProducts(productsList)
     }
 
     fun delete(id: String) {
-        products.remove(products.find { product: Product -> product.id == id })
+        productService.deleteProduct(id)
+    }
+
+    fun delete(productsList: List<Product>) {
+        productService.deleteProducts(productsList)
     }
 
 }

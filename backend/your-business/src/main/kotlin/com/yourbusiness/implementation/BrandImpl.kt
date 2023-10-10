@@ -5,31 +5,38 @@ import com.yourbusiness.service.BrandService
 import org.springframework.stereotype.Repository
 
 @Repository
-class BrandImpl(brandService: BrandService) {
+class BrandImpl(private val brandService: BrandService = BrandService()) {
 
-    private val brand1: Brand = Brand(name = "brand1")
-    private val brand2: Brand = Brand(name = "brand2")
-    private val brand3: Brand = Brand(name = "brand3")
-    private val brands: ArrayList<Brand> = arrayListOf(brand1, brand2, brand3)
-
-    fun getElement(id: String): Brand? {
-        return brands.find { brand: Brand -> brand.id == id }
+    fun get(id: String): Brand? {
+        return brandService.getBrand(id)
     }
 
-    fun getAll(): List<Brand> {
-        return brands
+    fun get(): List<Brand> {
+        return brandService.getBrands()
     }
 
-    fun update(id: String, brandRequest: Brand) {
-        val brand: Brand? = brands.find { brand: Brand -> brand.id == id }
-        brands[brands.indexOf(brand)] = brandRequest
+    fun update(brandRequest: Brand) {
+        brandService.updateBrand(brandRequest)
+    }
+
+    fun update(brandsList: List<Brand>) {
+        brandService.updateBrands(brandsList)
     }
 
     fun save(brandRequest: Brand) {
-        brands.add(brandRequest)
+        brandService.insertBrand(brandRequest)
     }
+
+    fun save(brandsList: List<Brand>) {
+        brandService.insertBrands(brandsList)
+    }
+
     fun delete(id: String) {
-        brands.remove(brands.find { brand: Brand -> brand.id == id })
+        brandService.deleteBrand(id)
+    }
+
+    fun delete(brandsList: List<Brand>) {
+        brandService.deleteBrands(brandsList)
     }
 
 }
